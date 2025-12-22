@@ -1,90 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Eclipse-X</title>
-  <link rel="stylesheet" href="style.css">
+<script>
+  const words = ["Eclipse-X", "Perfection", "Speed", "Freedom"];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
 
-  <!-- Inline styling just for homepage typing effect -->
-  <style>
-    #homepage {
-      text-align: center;
-      margin-top: 80px;
-    }
+  const typeEl = document.getElementById("typeword");
 
-    #typeword {
-      color: #00aaff;
-      text-shadow: 0 0 12px #00aaff;
-      border-right: 2px solid #00aaff;
-      padding-right: 4px;
-      animation: blink 0.9s infinite;
-    }
+  const TYPE_SPEED = 90;
+  const DELETE_SPEED = 60;
+  const HOLD_AFTER_TYPE = 1800;   // wait after fully typed
+  const HOLD_AFTER_DELETE = 700;  // wait before typing next word
 
-    @keyframes blink {
-      0%, 50% { border-color: #00aaff; }
-      51%, 100% { border-color: transparent; }
-    }
-  </style>
-</head>
+  function typeLoop() {
+    const current = words[wordIndex];
 
-<body>
-  <!-- Header / URL bar -->
-  <div id="header">
-    <input type="text" id="url-input" placeholder="Enter a URL to browse">
-    <button id="go-btn">Go</button>
-  </div>
-
-  <!-- Homepage -->
-  <div id="homepage">
-    <h1>
-      Welcome to <span id="typeword"></span>
-    </h1>
-    <p>Fast • Reliable • Anonymous</p>
-  </div>
-
-  <!-- Proxy iframe -->
-  <iframe
-    id="proxy-frame"
-    sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
-  </iframe>
-
-  <!-- Loading text -->
-  <div id="loading-message">Loading With Bypasser...</div>
-
-  <!-- Typing animation (petezah-style) -->
-  <script>
-    const words = ["Eclipse-X", "Perfection", "Speed", "Freedom"];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    const typeEl = document.getElementById("typeword");
-
-    function typeLoop() {
-      const current = words[wordIndex];
-
-      if (!isDeleting) {
-        typeEl.textContent = current.slice(0, charIndex++);
-        if (charIndex > current.length) {
-          setTimeout(() => isDeleting = true, 1200);
-        }
-      } else {
-        typeEl.textContent = current.slice(0, charIndex--);
-        if (charIndex === 0) {
-          isDeleting = false;
-          wordIndex = (wordIndex + 1) % words.length;
-        }
+    if (!isDeleting) {
+      typeEl.textContent = current.slice(0, charIndex++);
+      if (charIndex > current.length) {
+        setTimeout(() => isDeleting = true, HOLD_AFTER_TYPE);
+        return;
       }
-
-      setTimeout(typeLoop, isDeleting ? 60 : 90);
+    } else {
+      typeEl.textContent = current.slice(0, charIndex--);
+      if (charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        setTimeout(typeLoop, HOLD_AFTER_DELETE);
+        return;
+      }
     }
 
+    setTimeout(typeLoop, isDeleting ? DELETE_SPEED : TYPE_SPEED);
+  }
+
+  // Prevent blank start
+  typeEl.textContent = words[0];
+  charIndex = words[0].length;
+  setTimeout(() => {
+    isDeleting = true;
     typeLoop();
-  </script>
-
-  <!-- Your existing JS -->
-  <script src="app.js"></script>
-</body>
-</html>
-
+  }, HOLD_AFTER_TYPE);
+</script>
 
