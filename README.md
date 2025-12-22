@@ -53,20 +53,6 @@ Customizability
 
 Users and developers can adjust frame parameters to fit specific needs.
 
-Supports advanced routing rules, request throttling, and specialized configurations.
-
-Advantages Over Other Proxies
-
-Eclipse Frames give Eclipse-X distinct advantages over Scramjet, Ultraviolet, and other standard proxies:
-
-Feature	Eclipse-X (Eclipse Frames)	Other Proxies (Scramjet/Ultraviolet)
-Speed & Latency	⚡ Ultra-low latency, instant processing	Slower due to static or limited routing
-Stability	✅ Distributed frame system prevents crashes	Crashes under heavy traffic
-Privacy & Security	🔒 Frame-level encryption, no logs	Often logs user activity
-Resource Usage	🪶 Minimal CPU & memory load	High resource usage
-Scalability	🚀 Scales seamlessly to any traffic load	Limited by engine and network
-Independence	💎 Fully proprietary, no external dependency	Dependent on third-party engines
-Customizability	⚙️ Advanced configuration for users and devs	Limited or rigid configuration
 Why Eclipse Frames Matter
 
 Performance Without Compromise:
