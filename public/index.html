@@ -15,26 +15,49 @@
 
     /* Header / URL input */
     #header {
-      padding: 15px;
-      text-align: center;
-      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      gap: 10px;
+      background-color: #111;
     }
 
     #url-input {
-      padding: 8px;
-      width: 250px;
-      border-radius: 4px;
+      flex: 1;
+      min-width: 0;
+      width: 600px;
+      max-width: 80vw;
+      padding: 14px 16px;
+      font-size: 18px;
+      border-radius: 8px;
       border: none;
     }
 
     #go-btn {
-      padding: 8px 16px;
+      padding: 14px 20px;
+      font-size: 18px;
       border: none;
-      border-radius: 4px;
-      background: #00aaff;
+      border-radius: 8px;
+      background-color: #00aaff;
       color: black;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      #header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #url-input {
+        width: 90%;
+      }
+
+      #go-btn {
+        width: 50%;
+      }
     }
 
     /* Homepage */
@@ -73,7 +96,7 @@
   </style>
 </head>
 <body>
-  <!-- Header / URL bar -->
+  <!-- Header -->
   <div id="header">
     <input type="text" id="url-input" placeholder="Enter a URL to browse">
     <button id="go-btn">Go</button>
@@ -81,9 +104,7 @@
 
   <!-- Homepage -->
   <div id="homepage">
-    <h1>
-      Welcome to <span id="typeword"></span>
-    </h1>
+    <h1>Welcome to <span id="typeword"></span></h1>
     <p>Fast • Reliable • Anonymous</p>
   </div>
 
@@ -137,7 +158,7 @@
     });
   </script>
 
-  <!-- Proxy logic (your existing JS) -->
+  <!-- Your existing proxy logic -->
   <script src="app.js"></script>
 </body>
 </html>
