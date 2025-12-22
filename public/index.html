@@ -4,22 +4,87 @@
   <meta charset="UTF-8">
   <title>Eclipse-X</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Inline styling just for homepage typing effect -->
+  <style>
+    #homepage {
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    #typeword {
+      color: #00aaff;
+      text-shadow: 0 0 12px #00aaff;
+      border-right: 2px solid #00aaff;
+      padding-right: 4px;
+      animation: blink 0.9s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { border-color: #00aaff; }
+      51%, 100% { border-color: transparent; }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- Header / URL bar -->
   <div id="header">
     <input type="text" id="url-input" placeholder="Enter a URL to browse">
     <button id="go-btn">Go</button>
   </div>
 
+  <!-- Homepage -->
   <div id="homepage">
-    <h1>Welcome to Eclipse Proxy</h1>
-    <p>Fast , Reliable , Anonymous</p>
+    <h1>
+      Welcome to <span id="typeword"></span>
+    </h1>
+    <p>Fast • Reliable • Anonymous</p>
   </div>
 
-  <iframe id="proxy-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+  <!-- Proxy iframe -->
+  <iframe
+    id="proxy-frame"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
+  </iframe>
 
+  <!-- Loading text -->
   <div id="loading-message">Loading With Bypasser...</div>
 
+  <!-- Typing animation (petezah-style) -->
+  <script>
+    const words = ["Eclipse-X", "Perfection", "Speed", "Freedom"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    const typeEl = document.getElementById("typeword");
+
+    function typeLoop() {
+      const current = words[wordIndex];
+
+      if (!isDeleting) {
+        typeEl.textContent = current.slice(0, charIndex++);
+        if (charIndex > current.length) {
+          setTimeout(() => isDeleting = true, 1200);
+        }
+      } else {
+        typeEl.textContent = current.slice(0, charIndex--);
+        if (charIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+        }
+      }
+
+      setTimeout(typeLoop, isDeleting ? 60 : 90);
+    }
+
+    typeLoop();
+  </script>
+
+  <!-- Your existing JS -->
   <script src="app.js"></script>
 </body>
 </html>
+
+
