@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for eclipse-x on 2025-12-22T20:18:06Z
+# fly.toml app configuration file generated for eclipse-x on 2025-12-23T03:15:08Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'eclipse-x'
-primary_region = 'ewr'
+primary_region = 'lax'
 
 [build]
 
